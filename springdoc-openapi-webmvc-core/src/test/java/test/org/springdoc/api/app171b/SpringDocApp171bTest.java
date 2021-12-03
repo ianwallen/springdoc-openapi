@@ -16,21 +16,7 @@
  *
  */
 
-package test.org.springdoc.api.app171;
-
-import java.util.Locale;
-
-import org.junit.jupiter.api.Test;
-import org.springdoc.core.Constants;
-
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
-import test.org.springdoc.api.AbstractSpringDocTest;
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpHeaders;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.web.servlet.MvcResult;
+package test.org.springdoc.api.app171b;
 
 import static org.hamcrest.Matchers.is;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
@@ -38,14 +24,37 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@TestPropertySource(properties = Constants.SPRINGDOC_CACHE_DISABLED + "=false")
-public class SpringDocApp171Test extends AbstractSpringDocTest {
+import java.util.Locale;
 
-	@OpenAPIDefinition(info = @Info(
-			title = "test", version = "v0")
-	)
+import org.junit.jupiter.api.Test;
+import org.springdoc.core.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.web.servlet.MvcResult;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import test.org.springdoc.api.AbstractSpringDocTest;
+
+@TestPropertySource(properties = Constants.SPRINGDOC_CACHE_DISABLED + "=false")
+public class SpringDocApp171bTest extends AbstractSpringDocTest {
+
 	@SpringBootApplication
 	static class SpringDocTestApp {
+
+		@Autowired
+		ResourceBundleMessageSource resourceBundleMessageSource;
+
+		@Bean
+		public OpenAPI OpenApiConfig() {
+			return new OpenAPI().info(new Info()
+					.title(resourceBundleMessageSource.getMessage("test", null, Locale.getDefault()))
+					.version("v0"));
+		}
 	}
 
 	@Test
