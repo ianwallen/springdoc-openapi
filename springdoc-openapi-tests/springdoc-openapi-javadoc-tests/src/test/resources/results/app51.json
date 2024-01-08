@@ -56,6 +56,87 @@
         }
       }
     },
+    "/test5": {
+      "post": {
+        "tags": [
+          "hello-controller"
+        ],
+        "summary": "Hello response entity.",
+        "description": "Hello response entity.",
+        "operationId": "test5",
+        "requestBody": {
+          "description": "the map",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "Key": "Value"
+                },
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test4": {
+      "post": {
+        "tags": [
+          "hello-controller"
+        ],
+        "summary": "Hello response entity.",
+        "description": "Hello response entity.",
+        "operationId": "test4",
+        "requestBody": {
+          "description": "the map",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/test3": {
       "get": {
         "tags": [
